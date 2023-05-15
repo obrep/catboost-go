@@ -1,6 +1,6 @@
 module github.com/tikivn/catboost-go
 
-go 1.17
+go 1.19
 
 require gotest.tools v2.2.0+incompatible
 

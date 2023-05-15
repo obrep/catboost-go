@@ -6,7 +6,7 @@ CatBoost library is assumed to be installed and all its includes and library fil
 ```sh
 git clone --depth 1 --branch master https://github.com/catboost/catboost.git
 cd catboost/catboost/libs/model_interface && ../../../ya make -r .
-export CATBOOST_DIR=$(pwd)
+export CATBOOST_DIR=/home/po/repos/catboost-go/libs/linux
 export C_INCLUDE_PATH=$CATBOOST_DIR:$C_INCLUDE_PATH
 export LIBRARY_PATH=$CATBOOST_DIR:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$CATBOOST_DIR:$LD_LIBRARY_PATH

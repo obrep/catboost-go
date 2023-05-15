@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"catboost-go"
+	"github.com/tikivn/catboost-go"
 )
 
 func main() {
@@ -14,10 +14,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	predictions, err := model.CalcModelPrediction([][]float32{{6.7, 2.5, 5.8, 1.8}}, 4, nil, 0)
+	//predictions, err := model.CalcModelPrediction([][]float32{{6.7, 2.5, 5.8, 1.8}, {2, 4, 5, 1}}, 4, [][]string{{"this", "test"}, {"that", "test"}}, 2)
+	predictions, err := model.CalcModelPrediction([][]float32{{6.7, 2.5, 5.8, 1.8}, {2, 4, 5, 1}}, 4, nil, 0)
 	if err != nil {
 		log.Println(err)
 	}
+	model.GetModelUsedFeaturesNames()
 	log.Println(predictions)
 
 	log.Println("Done ")

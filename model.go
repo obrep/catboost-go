@@ -34,6 +34,7 @@ import "C"
 
 import (
 	"fmt"
+	"reflect"
 	"unsafe"
 )
 
@@ -113,4 +114,25 @@ func (model *Model) CalcModelPrediction(floats [][]float32, floatLength int, cat
 	}
 
 	return results, nil
+}
+
+// CATBOOST_API bool GetModelUsedFeaturesNames(ModelCalcerHandle* modelHandle, char*** featureNames, size_t* featureCount);
+
+func (model *Model) GetModelUsedFeaturesNames() []string {
+	featureCount := model.GetFloatFeaturesCount() + model.GetCatFeaturesCount()
+
+	// not sure about this - took over from how CalcModelPrediction handles categorical values
+	featureNames := make([]**C.char, featureCount)
+
+	CfeatureCount := C.size_t(featureCount)
+
+	// (***C.char casting still required)
+	C.GetModelUsedFeaturesNames(model.Handler, (***C.char)(&featureNames[0]), &CfeatureCount)
+
+	for i, v := range featureNames {
+		fmt.Println(reflect.TypeOf(v), reflect.TypeOf(i))
+		fmt.Println(C.GoString(*v))
+	}
+
+	return []string{""}
 }
